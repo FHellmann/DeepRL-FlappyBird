@@ -25,11 +25,7 @@ class DQLearningAgent:
         self.model = self.build_model()
 
     def build_model(self):
-        # Neural Net for Deep-Q learning Model
         model = Sequential()
-
-        # a)
-        # Add network architecture
         model.add(Dense(self.nr_actions * self.dense_dimension * 2, input_shape=(self.state_size,), activation='relu'))
         model.add(Dense(self.nr_actions * self.dense_dimension, activation='relu'))
         model.add(Dense(self.nr_actions))
@@ -46,12 +42,7 @@ class DQLearningAgent:
         self.model.save(self.weight_backup)
 
     def policy(self, state):
-        # b)
-        # Get action from network
-        #if random.random() >= self.epsilon:
         return np.argmax(self.model.predict(self._expand_state(state), batch_size=1))
-        #else:
-        #    return random.randint(0, self.nr_actions - 1)
 
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))

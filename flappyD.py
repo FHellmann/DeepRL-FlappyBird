@@ -229,9 +229,6 @@ def mainGame(movementInfo):
         else:
             currentPipe = lowerPipes[1]
 
-        # TODO
-        # b)
-        # do action
         action = agent.policy(state)
 
         if action == FLAP:
@@ -342,12 +339,7 @@ def mainGame(movementInfo):
         playerSurface = pygame.transform.rotate(IMAGES['player'][playerIndex], visibleRot)
         SCREEN.blit(playerSurface, (playerx, playery))
 
-        # TODO
-        # c)
-        # Replace with appropriate state
         next_state = [crashTest[0], currentPipe['x'] - playerx, currentPipe['y'] - playery]
-
-        # Replace with appropriate reward function
         reward = getReward(crashTest[0])
 
         agent.remember(state, action, reward, next_state, crashTest[0])
@@ -358,7 +350,6 @@ def mainGame(movementInfo):
 
 def getReward(crash):
     """ reward function"""
-    #implement reward function here
     return -1000 if crash else 1
 
 
